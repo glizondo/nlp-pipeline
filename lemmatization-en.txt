@@ -4702,6 +4702,7 @@ buzzer	buzzers
 buzzword	buzzwords
 buzz-word	buzz-words
 bv	bvs
+by      by
 byelaw	byelaws
 bye-law	bye-laws
 by-election	by-elections

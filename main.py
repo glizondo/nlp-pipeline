@@ -36,13 +36,13 @@ def tokenization(text_array):
     for phrase in text_array:
         found_tokens = re.findall(pattern, phrase)
         tokens.extend(found_tokens)
-    print(f'Tokens {tokens}')
+    print(f'TOKENS: {tokens}')
     return tokens
 
 
 def classify_tokens(tokens):
     tagged = nltk.pos_tag(tokens)
-    print(f'Classification tokens {tagged}')
+    print(f'CLASSIFICATION TOKENS: {tagged}')
     return tagged
 
 
@@ -61,21 +61,23 @@ def create_lemmatization_table():
 def print_doc_without_stop_words(tokens, lemmatization_table, stop_words):
     result_tokens = []
     lemma_stop_words_dict = {}
+    deleted_tokens = []
     for base, extension in lemmatization_table.items():
         if base in stop_words or extension in stop_words:
             lemma_stop_words_dict[base] = extension
     for token in tokens:
         if token in lemma_stop_words_dict.keys() or token in lemma_stop_words_dict.values():
-            print(f'DELETED TOKEN: {token}')
+            deleted_tokens.append(token)
         else:
             result_tokens.append(token)
     text = ''
-    for word in tokens:
+    for word in result_tokens:
         if word == ',':
             text += '\n'
         else:
             text += ' ' + word
-    print(text)
+    print(f'DELETED TOKENS: {deleted_tokens}')
+    print(f'FINAL TEXT: {text}')
 
 
 pipeline()
